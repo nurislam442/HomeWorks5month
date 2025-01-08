@@ -43,3 +43,11 @@ def review_detail_view(request, id):
     review = Review.objects.get(id=id)
     data = Review_serializer(instance=review).data
     return Response(data=data)
+    
+@api_view(http_method_names=["GET",])
+def review_movie_view(request):
+    if request.method == "GET":
+        reviews = Review.objects.all()
+        list_ = Review_Movie_serializer(instance=reviews, many=True).data
+        return Response(data=list_)
+
