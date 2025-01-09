@@ -22,11 +22,10 @@ class Review_serializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class Review_Movie_serializer(serializers.ModelSerializer):
-    movie = Movie_serializer()
     rating = serializers.SerializerMethodField()
+    reviews = Review_serializer(many=True)
     class Meta:
-        model = Review
-        fields = 'text stars movie rating rating'.split()
+        model = Movie
+        fields = 'title description duration director reviews rating'.split()
     def get_rating(self, stars):
-        stars = Review.objects.values_list('stars', flat=True)
-        return sum(stars)/len(stars)
+        return stars.rating()
