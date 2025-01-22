@@ -111,7 +111,7 @@ def review_detail_view(request, id):
     elif request.method == "PUT":
         serializer = ReviewsValidateSerilizer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        review.text = serializer.validated_data.gett("text")
+        review.text = serializer.validated_data.get("text")
         review.stars = serializer.validated_data.get("stars")
         review.movie_id = serializer.validated_data.get("movie_id")
         review.save()
