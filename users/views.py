@@ -19,11 +19,10 @@ def register_api_view(request):
     password = serializer.validated_data['password']
     user = User.objects.create_user(username=username, password=password, is_active=False)
 
-    code = str(random.randint(100000, 999999))
 
-    VerificationCode.objects.create(user=user, code=code)
+    VerificationCode.objects.create(user=user)
     return Response(status=status.HTTP_201_CREATED,
-                    data={'user_id': user.id, "code": code})
+                    data={'user_id': user.id})
     
 @api_view(['POST'])
 def auth_api_view(request):
