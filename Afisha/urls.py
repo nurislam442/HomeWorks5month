@@ -14,5 +14,5 @@ urlpatterns = [
     path("api/v1/movies/reviews/", views.Review_movie_view.as_view()),
     path('api/v1/users/registration/', register_api_view),
     path('api/v1/users/authorization/', auth_api_view),
-    path("api/v1/users/confirm/", confirm_api_view),
+    path("api/v1/users/confirm/", SMSCodeConfirm),
 ]

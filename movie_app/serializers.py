@@ -58,14 +58,14 @@ class MoviesValidateSerializer(serializers.Serializer):
 
     def validate_director_id(self, director_id):
         try:
-            director = director.objects.get(id=director_id)
+            director = Director.objects.get(id=director_id)
         except:
             raise ValidationError('director does not exist!')
         return director_id
 
 class ReviewsValidateSerilizer(serializers.Serializer):
     text = serializers.CharField()
-    movie = serializers.CharField()
+    movie_id = serializers.CharField()
     GRADES = (
         (1, '*'),
         (2, '* *'),
@@ -75,7 +75,7 @@ class ReviewsValidateSerilizer(serializers.Serializer):
     )
     stars = serializers.ChoiceField(choices=GRADES, default=1)
 
-    def validate_movie(self, value):
+    def validate_movie_id(self, value):
         if value is None:
             raise serializers.ValidationError("Movie cannot be null.")
         return value
